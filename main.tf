@@ -109,8 +109,6 @@ module "vpc" {
   default_security_group_egress = [ 
     {
       description       = "Tecmilenio SSH Rule Outbound"
-      from_port         = 0
-      to_port           = 0
       protocol          = "-1"
       cidr_blocks       = "0.0.0.0/0"
     }
