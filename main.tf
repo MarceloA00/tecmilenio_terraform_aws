@@ -65,7 +65,7 @@ module "ec2_instance" {
   key_name = module.key_pair.key_pair_name
   associate_public_ip_address = true
   subnet_id = module.vpc.public_subnets[0]
-  user_data = "sudo apt update && sudo apt install -y python2 && sudo ln -s /usr/bin/python2 /usr/bin/python"
+  user_data = "sudo apt update && sudo apt install -y python3 && sudo ln -s /usr/bin/python3 /usr/bin/python"
 
   tags = {
     Terraform   = "true"
@@ -73,7 +73,7 @@ module "ec2_instance" {
   }
 
   # ami = data.aws_ami.example.id
-  ami = "ami-07d9b9ddc6cd8dd30"
+  ami = "ami-0cd59ecaf368e5ccf"
 }
 
 module "key_pair" {
