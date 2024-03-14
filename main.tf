@@ -42,15 +42,15 @@ data "aws_ami" "example" {
   }
 }
 
-resource "aws_security_group_rule" "ssh" {
-  description       = "Tecmilenio SSH Rule Inbound"
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = module.vpc.default_security_group_id
-}
+# resource "aws_security_group_rule" "ssh" {
+#   description       = "Tecmilenio SSH Rule Inbound"
+#   type              = "ingress"
+#   from_port         = 22
+#   to_port           = 22
+#   protocol          = "tcp"
+#   cidr_blocks       = ["0.0.0.0/0"]
+#   security_group_id = module.vpc.default_security_group_id
+# }
 
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
@@ -94,6 +94,26 @@ module "vpc" {
 
   enable_nat_gateway = true
   enable_vpn_gateway = true
+
+  default_security_group_ingress = [ 
+    {
+      description       = "Tecmilenio SSH Rule Inbound"
+      from_port         = 22
+      to_port           = 22
+      protocol          = "tcp"
+      cidr_blocks       = "0.0.0.0/0"
+    }
+  ]
+
+  default_security_group_egress = [ 
+    {
+      description       = "Tecmilenio SSH Rule Outbound"
+      from_port         = 0
+      to_port           = 65535
+      protocol          = "-1"
+      cidr_blocks       = "0.0.0.0/0"
+    }
+  ]
 
   tags = {
     Terraform = "true"
