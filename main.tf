@@ -73,7 +73,7 @@ module "ec2_instance" {
   }
 
   # ami = data.aws_ami.example.id
-  ami = "ami-0b98a32b1c5e0d105"
+  ami = "ami-07d9b9ddc6cd8dd30"
 }
 
 module "key_pair" {
