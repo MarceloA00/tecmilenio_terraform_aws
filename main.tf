@@ -72,7 +72,8 @@ module "ec2_instance" {
     Environment = "dev"
   }
 
-  ami = data.aws_ami.example.id
+  # ami = data.aws_ami.example.id
+  ami = "ami-0b98a32b1c5e0d105"
 }
 
 module "key_pair" {
@@ -109,7 +110,7 @@ module "vpc" {
     {
       description       = "Tecmilenio SSH Rule Outbound"
       from_port         = 0
-      to_port           = 65535
+      to_port           = 0
       protocol          = "-1"
       cidr_blocks       = "0.0.0.0/0"
     }
