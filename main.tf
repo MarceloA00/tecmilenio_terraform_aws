@@ -76,11 +76,16 @@ module "ec2_instance" {
   ami = "ami-0cd59ecaf368e5ccf"
 }
 
+resource "tls_private_key" "this" {
+  algorithm = "RSA"
+}
+
 module "key_pair" {
   source = "terraform-aws-modules/key-pair/aws"
 
   key_name           = "tecmilenio-key"
   create_private_key = true
+  public_key = trimspace(tls_private_key.this.public_key_openssh)
 }
 
 module "vpc" {
